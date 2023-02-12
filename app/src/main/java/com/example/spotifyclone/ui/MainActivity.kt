@@ -1,6 +1,7 @@
 package com.example.spotifyclone.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -28,9 +29,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        binding.callApiBtn.setOnClickListener {
-            Toast.makeText(this, "btn click", Toast.LENGTH_SHORT).show()
-            viewModel.callMovieDetailsById(AppConstant.DUMMY_MOVIE_ID)
+        binding.apply {
+            callApiBtn.setOnClickListener {
+                Toast.makeText(this@MainActivity, "btn click", Toast.LENGTH_SHORT).show()
+                viewModel.callMovieDetailsById(AppConstant.DUMMY_MOVIE_ID)
+            }
+
+            saveBtn.setOnClickListener {
+                viewModel.putStringValueToPref("TEST_KEY", "DPK")
+            }
+
+            getBtn.setOnClickListener {
+                val value = viewModel.getStringValueFromPref("TEST_KEY") ?: "NULL"
+                Toast.makeText(this@MainActivity, value, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, value)
+            }
         }
     }
 
