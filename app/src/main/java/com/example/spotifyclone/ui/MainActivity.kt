@@ -36,13 +36,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             saveBtn.setOnClickListener {
-                viewModel.putStringValueToPref("TEST_KEY", "DPK")
+                viewModel.saveValueToPref("TEST_KEY", "DPK")
             }
 
             getBtn.setOnClickListener {
-                val value = viewModel.getStringValueFromPref("TEST_KEY") ?: "NULL"
-                Toast.makeText(this@MainActivity, value, Toast.LENGTH_SHORT).show()
-                Log.d(TAG, value)
+                val value: String? = viewModel.getStringValueFromPref("TEST_KEY")
+                Toast.makeText(this@MainActivity, value ?: "NULL", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, value ?: "NULL")
             }
         }
     }
