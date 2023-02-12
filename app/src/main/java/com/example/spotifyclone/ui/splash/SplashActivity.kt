@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.example.spotifyclone.R
-import com.example.spotifyclone.ui.MainActivity
+import com.example.spotifyclone.ui.HomeActivity
 
 // todo remove warning
 class SplashActivity : AppCompatActivity() {
@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val i = Intent(this@SplashActivity, MainActivity::class.java)
+            val i = Intent(this@SplashActivity, HomeActivity::class.java)
             startActivity(i)
             // close this activity
             finish()

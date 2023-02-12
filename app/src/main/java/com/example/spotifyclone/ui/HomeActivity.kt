@@ -6,22 +6,22 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import base.BaseActivity
 import com.example.domain.AppConstant
-import com.example.spotifyclone.databinding.ActivityMainBinding
+import com.example.spotifyclone.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class HomeActivity : BaseActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
     }
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityHomeBinding
     private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews()
 
@@ -31,7 +31,7 @@ class MainActivity : BaseActivity() {
     override fun initViews() {
         binding.apply {
             callApiBtn.setOnClickListener {
-                Toast.makeText(this@MainActivity, "btn click", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@HomeActivity, "btn click", Toast.LENGTH_SHORT).show()
                 viewModel.callMovieDetailsById(AppConstant.DUMMY_MOVIE_ID)
             }
 
@@ -41,7 +41,7 @@ class MainActivity : BaseActivity() {
 
             getBtn.setOnClickListener {
                 val value: String? = viewModel.getStringValueFromPref("TEST_KEY")
-                Toast.makeText(this@MainActivity, value ?: "NULL", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@HomeActivity, value ?: "NULL", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, value ?: "NULL")
             }
         }
@@ -49,9 +49,9 @@ class MainActivity : BaseActivity() {
 
     override fun observers() {
         viewModel.apply {
-            response.observe(this@MainActivity) { model ->
+            response.observe(this@HomeActivity) { model ->
                 Toast.makeText(
-                    this@MainActivity,
+                    this@HomeActivity,
                     "actors: ${model.actors} awards: ${model.awards}",
                     Toast.LENGTH_LONG
                 ).show()
