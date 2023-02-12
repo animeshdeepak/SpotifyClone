@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import base.BaseActivity
 import com.example.domain.AppConstant
 import com.example.spotifyclone.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         observers()
     }
 
-    private fun initViews() {
+    override fun initViews() {
         binding.apply {
             callApiBtn.setOnClickListener {
                 Toast.makeText(this@MainActivity, "btn click", Toast.LENGTH_SHORT).show()
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun observers() {
+    override fun observers() {
         viewModel.apply {
             response.observe(this@MainActivity) { model ->
                 Toast.makeText(
